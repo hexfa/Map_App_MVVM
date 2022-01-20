@@ -57,8 +57,12 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 in 1.5..2.0 -> {
                     mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)).position(LatLng(location.latitude, location.longitude)))
 
-                }else ->{
+                }
+                in 2.0..Double.MAX_VALUE-> {
                 mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)).position(LatLng(location.latitude, location.longitude)))
+                }
+                else ->{
+                    mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).position(LatLng(location.latitude, location.longitude)))
                 }
 
             }
