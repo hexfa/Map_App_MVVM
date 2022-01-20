@@ -1,0 +1,22 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=BB:F3:6B:13:83:40:E3:92:CA:33:2F:D2:1E:DB:6F:BF:F2:29:28:B9%3Bland.meridia.amir.map
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    meridia  SHA-1 certificate fingerprint:
+    BB:F3:6B:13:83:40:E3:92:CA:33:2F:D2:1E:DB:6F:BF:F2:29:28:B9
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCwQc57PT-HZyatm0F6tBp17pAY7nxrNT8</string>
+</resources>
