@@ -46,8 +46,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
-    fun drawPolygon(points: List<Point>) {
+    private fun drawPolygon(points: List<Point>) {
         val opts = PolygonOptions()
+        val simplePoint=LatLng(points[0].latitude, points[0].longitude)
         for (location in points) {
             opts.add(LatLng(location.latitude, location.longitude))
             when (location.accuracy) {
@@ -67,15 +68,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
             }
 
-            mMap.moveCamera(
-                CameraUpdateFactory.newLatLngZoom(
-                    LatLng(
-                        location.latitude,
-                        location.longitude
-                    ), zoomLevel
-                )
-            );
+
         }
+        mMap.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                simplePoint, zoomLevel
+            )
+        );
         mMap.addPolygon(
             opts.strokeColor(Color.BLACK).strokeWidth(3f)
                 .fillColor(Color.argb(20, 255, 0, 50))
