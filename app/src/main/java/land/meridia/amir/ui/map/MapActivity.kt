@@ -26,7 +26,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapBinding
-    val zoomLevel = 16.0f //This goes up to 21
+    val zoomLevel = 12.0f //This goes up to 21
 
     private val mapViewModel by viewModels<MapViewModel>()
 
@@ -47,7 +47,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun drawPolygon(points: List<Point>) {
-        val simpleLocation = LatLng(points.get(0).latitude,points.get(0).longitude)
         val opts = PolygonOptions()
         for (location in points) {
             opts.add(LatLng(location.latitude, location.longitude))
@@ -64,14 +63,15 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
             }
 
-
+            mMap.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    LatLng(
+                        location.latitude,
+                        location.longitude
+                    ), zoomLevel
+                )
+            );
         }
-        mMap.moveCamera(
-            CameraUpdateFactory.newLatLngZoom(
-                simpleLocation
-                , zoomLevel
-            )
-        );
         mMap.addPolygon(
             opts.strokeColor(Color.BLACK).strokeWidth(3f)
                 .fillColor(Color.argb(20, 255, 0, 50))
