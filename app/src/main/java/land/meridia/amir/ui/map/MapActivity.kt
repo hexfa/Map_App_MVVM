@@ -51,19 +51,22 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         val simplePoint=LatLng(points[0].latitude, points[0].longitude)
         for (location in points) {
             opts.add(LatLng(location.latitude, location.longitude))
-            when (location.accuracy) {
-                in 0.0..1.5 -> {
-                    mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).position(LatLng(location.latitude, location.longitude)))
-                }
-                in 1.5..2.0 -> {
-                    mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)).position(LatLng(location.latitude, location.longitude)))
+            location.accuracy.let{
+                when (it) {
+                    in 0.0..1.5 -> {
+                        mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).position(LatLng(location.latitude, location.longitude)))
+                    }
+                    in 1.5..2.0 -> {
+                        mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)).position(LatLng(location.latitude, location.longitude)))
 
-                }
-                in 2.0..Double.MAX_VALUE-> {
-                mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)).position(LatLng(location.latitude, location.longitude)))
-                }
-                else ->{
-                    mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).position(LatLng(location.latitude, location.longitude)))
+                    }
+                    in 2.0..Double.MAX_VALUE-> {
+                        mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)).position(LatLng(location.latitude, location.longitude)))
+                    }
+                    else ->{
+                        mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).position(LatLng(location.latitude, location.longitude)))
+                    }
+
                 }
 
             }
