@@ -8,6 +8,7 @@ import land.meridia.amir.repository.MapRepository
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,11 +25,14 @@ class MapViewModel @Inject constructor(
 
 
     @InternalCoroutinesApi
+
     fun fetchResponse() = viewModelScope.launch {
         repository.getFeatures().collect{
+
             _response.value = it
         }
     }
+
 
 }
 

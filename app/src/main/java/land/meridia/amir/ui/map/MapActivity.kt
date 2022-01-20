@@ -28,7 +28,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapBinding
     private val zoomLevel = 12.0f //This goes up to 21
-
     private val mapViewModel by viewModels<MapViewModel>()
 
     
@@ -37,12 +36,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
 
-        fetchData()
+
 
 
     }
@@ -90,6 +90,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     @InternalCoroutinesApi
     private fun fetchData() {
         mapViewModel.fetchResponse()
+
         mapViewModel.response.observe(this) { res ->
             when (res) {
                 is NetworkResult.Success -> {
@@ -114,5 +115,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(-34.0, 151.0)
 //        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        fetchData()
     }
 }
