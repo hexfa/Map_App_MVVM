@@ -21,16 +21,17 @@ import land.meridia.amir.databinding.ActivityMapBinding
 
 
 @AndroidEntryPoint
+@InternalCoroutinesApi
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapBinding
-    val zoomLevel = 12.0f //This goes up to 21
+    private val zoomLevel = 12.0f //This goes up to 21
 
     private val mapViewModel by viewModels<MapViewModel>()
 
-    @InternalCoroutinesApi
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapBinding.inflate(layoutInflater)
@@ -48,7 +49,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun drawPolygon(points: List<Point>) {
         val opts = PolygonOptions()
-        val simplePoint=LatLng(points[0].latitude, points[0].longitude)
+        val simplePoint=LatLng(points[0].latitude,points[0].longitude)
         for (location in points) {
             opts.add(LatLng(location.latitude, location.longitude))
             location.accuracy.let{
@@ -77,7 +78,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             CameraUpdateFactory.newLatLngZoom(
                 simplePoint, zoomLevel
             )
-        );
+        )
         mMap.addPolygon(
             opts.strokeColor(Color.BLACK).strokeWidth(3f)
                 .fillColor(Color.argb(20, 255, 0, 50))
@@ -89,10 +90,10 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     @InternalCoroutinesApi
     private fun fetchData() {
         mapViewModel.fetchResponse()
-        mapViewModel.response.observe(this) {
-            when (it) {
+        mapViewModel.response.observe(this) { res ->
+            when (res) {
                 is NetworkResult.Success -> {
-                    it.data?.features?.forEach {
+                    res.data?.features?.forEach {
                         drawPolygon(it.points)
                     }
                 }
@@ -111,7 +112,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+//        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 }

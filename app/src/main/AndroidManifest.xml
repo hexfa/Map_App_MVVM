@@ -24,7 +24,9 @@
         </activity>
         <activity
             android:name="land.meridia.amir.ui.map.MapActivity"
-            android:exported="false">
+            android:exported="false"
+            android:label="@string/map_activity_name"
+            android:parentActivityName=".ui.MainActivity">
         </activity>
 
         <meta-data
