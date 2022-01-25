@@ -4,8 +4,6 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import land.meridia.amir.model.Point
-import land.meridia.amir.network.NetworkResult
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -18,6 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
 import land.meridia.amir.R
 import land.meridia.amir.databinding.ActivityMapBinding
+import land.meridia.amir.model.Point
+import land.meridia.amir.network.NetworkResult
 
 
 @AndroidEntryPoint
@@ -30,7 +30,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private val zoomLevel = 12.0f //This goes up to 21
     private val mapViewModel by viewModels<MapViewModel>()
 
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapBinding.inflate(layoutInflater)
@@ -42,30 +42,35 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
 
-
-
-
     }
 
     private fun drawPolygon(points: List<Point>) {
         val opts = PolygonOptions()
-        val simplePoint=LatLng(points[0].latitude,points[0].longitude)
+        val simplePoint = LatLng(points[0].latitude, points[0].longitude)
         for (location in points) {
             opts.add(LatLng(location.latitude, location.longitude))
-            location.accuracy.let{
+            location.accuracy.let {
                 when (it) {
                     in 0.0..1.5 -> {
-                        mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).position(LatLng(location.latitude, location.longitude)))
+                        mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(
+                            BitmapDescriptorFactory.HUE_GREEN))
+                            .position(LatLng(location.latitude, location.longitude)))
                     }
                     in 1.5..2.0 -> {
-                        mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)).position(LatLng(location.latitude, location.longitude)))
+                        mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(
+                            BitmapDescriptorFactory.HUE_YELLOW))
+                            .position(LatLng(location.latitude, location.longitude)))
 
                     }
-                    in 2.0..Double.MAX_VALUE-> {
-                        mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)).position(LatLng(location.latitude, location.longitude)))
+                    in 2.0..Double.MAX_VALUE -> {
+                        mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(
+                            BitmapDescriptorFactory.HUE_ORANGE))
+                            .position(LatLng(location.latitude, location.longitude)))
                     }
-                    else ->{
-                        mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)).position(LatLng(location.latitude, location.longitude)))
+                    else -> {
+                        mMap.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(
+                            BitmapDescriptorFactory.HUE_BLUE))
+                            .position(LatLng(location.latitude, location.longitude)))
                     }
 
                 }

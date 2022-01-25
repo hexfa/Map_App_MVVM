@@ -2,5 +2,4 @@
     <string name="app_name">Meridia Map</string>
     <string name="btn_txt">Open Google Maps</string>
     <string name="map_activity_name">Google Maps</string>
-
 </resources>

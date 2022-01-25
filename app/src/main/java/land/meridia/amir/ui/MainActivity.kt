@@ -1,8 +1,8 @@
 package land.meridia.amir.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.InternalCoroutinesApi
 import land.meridia.amir.databinding.ActivityMainBinding
 import land.meridia.amir.ui.map.MapActivity
@@ -17,8 +17,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.button.setOnClickListener{
-            startActivity( Intent(this@MainActivity, MapActivity::class.java))
+        binding.button.setOnClickListener {
+            startActivity(Intent(this@MainActivity, MapActivity::class.java))
         }
     }
 }
